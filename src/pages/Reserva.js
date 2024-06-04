@@ -1,19 +1,48 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import portada from '../img/portada.jpg';
 import ConfirmacionReserva from '../components/Modal/ConfirmacionReserva';
+import reservaService from '../service/reserva'; // Asegúrate de ajustar la ruta según sea necesario
 
 const Reserva = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [reserva, setReserva] = useState([]);
+  const [newReserva, setnewReserva] = useState({
+    descripcion: '',
+    fechaingreso: '',
+    numeropersonas: '',
+    precio: '',
+  });
 
-  const handleOrdenarClick = () => {
-    setModalOpen(true);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setnewReserva({
+      ...newReserva,
+      [name]: value,
+    });
+  };
+
+  const handleOrdenarClick = (e) => {
+    e.preventDefault(); // Evita el comportamiento predeterminado del botón
+    reservaService.createReserva(newReserva)
+      .then((data) => {
+        setReserva([...reserva, data]);
+        setnewReserva({
+          descripcion: '',
+          fechaingreso: '', 
+          numeropersonas: '',
+          precio: '',
+        })
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   const handleCloseModal = () => {
     setModalOpen(false);
   };
+
   return (
     <Container>
       <Form>
@@ -24,17 +53,17 @@ const Reserva = () => {
           <Price>Precio: $$</Price>
         </LeftSection>
         <RightSection>
-          <Label>Cantidad</Label>
-          <Input type="number" />
-          <Label>Personas</Label>
-          <Input type="number" />
-          <Label>Fecha de reserva</Label>
-          <Input type="date" />
-          <Label>Hora de reserva</Label>
-          <Input type="time" />
+          <Label>Descripción</Label>
+          <Input type="string" value={newReserva.descripcion} onChange={handleChange} name="descripcion" />
+          <Label>Fecha ingreso</Label>
+          <Input type="date" value={newReserva.fechaingreso} onChange={handleChange} name="fechaingreso" />
+          <Label>Número de personas</Label>
+          <Input type="number" value={newReserva.numeropersonas} onChange={handleChange} name="numeropersonas" />
+          <Label>Precio</Label>
+          <Input type="number" value={newReserva.precio} onChange={handleChange} name="precio" />
         </RightSection>
       </Form>
-      <Button onClick={handleOrdenarClick}>Ordenar</Button>
+      <Button onClick={handleOrdenarClick} type="submit">Ordenar</Button>
       <ConfirmacionReserva isOpen={modalOpen} onClose={handleCloseModal} />
     </Container>
   );
@@ -50,7 +79,7 @@ const Container = styled.div`
   height: 100vh;
 `;
 
-const Form = styled.div`
+const Form = styled.div` /* Cambiado a styled.div ya que no se utiliza onSubmit */
   display: flex;
   justify-content: space-between; /* Alinea las secciones izquierda y derecha */
   align-items: flex-start; /* Alinea las secciones en la parte superior */

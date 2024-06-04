@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 
-const ConfirmacionReserva = ({ isOpen, onClose }) => {
+const ConfirmacionReserva = ({ isOpen, onClose, reserva }) => {
   const [mostrarNotificacion, setMostrarNotificacion] = useState(false);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ const ConfirmacionReserva = ({ isOpen, onClose }) => {
     setMostrarNotificacion(true);
     setTimeout(() => {
       onClose();
-      window.location.href = '/'; // Redirecciona al index
+      window.location.href = "/"; // Redirecciona al index
     }, 2000);
   };
 
@@ -32,19 +32,35 @@ const ConfirmacionReserva = ({ isOpen, onClose }) => {
               <ModalColumn>
                 <SectionHeader>Datos del Cliente</SectionHeader>
                 <SectionContent>
-                  <p><strong>Nombre:</strong> Nombre del cliente</p>
-                  <p><strong>Email:</strong> Email del cliente</p>
-                  <p><strong>Teléfono:</strong> Teléfono del cliente</p>
+                  <p>
+                    <strong>Nombre:</strong> {reserva.nombreCliente}
+                  </p>
+                  <p>
+                    <strong>Email:</strong> {reserva.emailCliente}
+                  </p>
+                  <p>
+                    <strong>Teléfono:</strong> {reserva.telefonoCliente}
+                  </p>
                 </SectionContent>
               </ModalColumn>
               <ModalColumn>
                 <SectionHeader>Datos del Plato</SectionHeader>
                 <SectionContent>
-                  <p><strong>Nombre del Plato:</strong> Nombre del plato</p>
-                  <p><strong>Precio:</strong> Precio del plato</p>
-                  <p><strong>Cantidad:</strong> Cantidad de platos reservados</p>
-                  <p><strong>Fecha de Reserva:</strong> Fecha de la reserva</p>
-                  <p><strong>Hora de Reserva:</strong> Hora de la reserva</p>
+                  <p>
+                    <strong>Nombre del Plato:</strong> {reserva.nombrePlato}
+                  </p>
+                  <p>
+                    <strong>Precio:</strong> {reserva.precio}
+                  </p>
+                  <p>
+                    <strong>Cantidad:</strong> {reserva.cantidadPlatos}
+                  </p>
+                  <p>
+                    <strong>Fecha de Reserva:</strong> {reserva.fechaReserva}
+                  </p>
+                  <p>
+                    <strong>Hora de Reserva:</strong> {reserva.horaReserva}
+                  </p>
                 </SectionContent>
               </ModalColumn>
             </ModalRow>
@@ -53,7 +69,9 @@ const ConfirmacionReserva = ({ isOpen, onClose }) => {
         </ModalOverlay>
       )}
       {mostrarNotificacion && (
-        <Notification>Anuncio: Su reserva ha sido enviada correctamente</Notification>
+        <Notification>
+          Anuncio: Su reserva ha sido enviada correctamente
+        </Notification>
       )}
     </>
   );
