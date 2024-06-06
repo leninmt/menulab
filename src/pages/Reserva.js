@@ -53,6 +53,8 @@ const Reserva = () => {
           <Price>Precio: $$</Price>
         </LeftSection>
         <RightSection>
+          <Label>Nombre</Label>
+          <Input type="string" value={newReserva.nombre} onChange={handleChange} name="nombre"  required/>
           <Label>Descripción</Label>
           <Input type="string" value={newReserva.descripcion} onChange={handleChange} name="descripcion" />
           <Label>Fecha ingreso</Label>
