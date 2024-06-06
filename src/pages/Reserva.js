@@ -81,7 +81,7 @@ const Container = styled.div`
 
 const Form = styled.div` /* Cambiado a styled.div ya que no se utiliza onSubmit */
   display: flex;
-  justify-content: space-between; /* Alinea las secciones izquierda y derecha */
+  justify-content: space-between; /* Alinpnea las secciones izquierda y derecha */
   align-items: flex-start; /* Alinea las secciones en la parte superior */
   width: 80%;
   max-width: 800px;
