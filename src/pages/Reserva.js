@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import {BackgroundContainer,Container,Section,SectionTitle,PlatoForm,ClienteForm,PlatoContainer,ImageContainer,PlatoDetailsContainer,InputsContainer, PlatoDetails,Image,Title,Description,Price,InputContainer,Label,Input,ButtonContainer,Button} from '../styles/ReservaStyles.js'
+
 import portada from '../img/portada.jpg';
 import ConfirmacionReserva from '../components/Modal/ConfirmacionReserva';
 import reservaService from '../service/reserva'; // Asegúrate de ajustar la ruta según sea necesario
@@ -56,6 +57,7 @@ const Reserva = () => {
   };
 
   return (
+    <BackgroundContainer>
     <Container>
       <PlatoForm>
         <Section>
@@ -102,108 +104,9 @@ const Reserva = () => {
       </ClienteForm>
       <ConfirmacionReserva isOpen={modalOpen} onClose={handleCloseModal} />
     </Container>
+    </BackgroundContainer>
   );
 };
 
 export default Reserva;
 
-const Container = styled.div`
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
-  width: 80%;
-  max-width: 1200px;
-  margin: auto;
-`;
-
-const FormSection = styled.div`
-  flex-basis: 45%;
-`;
-
-const Section = styled.div`
-  margin-bottom: 2rem;
-`;
-
-const SectionTitle = styled.h2`
-  margin-bottom: 1rem;
-`;
-
-const PlatoForm = styled(FormSection)`
-  margin-right: 2rem;
-`;
-
-const ClienteForm = styled(FormSection)``;
-
-const PlatoContainer = styled.div`
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 1.5rem;
-`;
-
-const ImageContainer = styled.div`
-  flex: 0 0 30%;
-`;
-
-const PlatoDetailsContainer = styled.div`
-  flex: 0 0 50%;
-`;
-
-const InputsContainer = styled.div`
-  flex: 0 0 20%;
-`;
-
-const PlatoDetails = styled.div`
-  margin-left: 1.5rem;
-`;
-
-const Image = styled.img`
-  width: 100%;
-  height: auto;
-`;
-
-const Title = styled.h2`
-  margin-bottom: 0.5rem;
-`;
-
-const Description = styled.p`
-  margin-bottom: 0.5rem;
-`;
-
-const Price = styled.p`
-  margin-bottom: 0.5rem;
-`;
-
-const InputContainer = styled.div`
-  margin-bottom: 1rem;
-`;
-
-const Label = styled.label`
-  display: block;
-  margin-bottom: 0.5rem;
-`;
-
-const Input = styled.input`
-  width: 100%;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 1rem;
-`;
-
-const Button = styled.button`
-  background-color: #FFA500;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  width: 100%;
-  max-width: 200px;
-  &:hover {
-    background-color: #FF8C00;
-  }
-`;
